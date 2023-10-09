@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.springboot.app.dto.CodigoDTO;
 import com.backend.springboot.app.dto.RespuestaDTO;
 import com.backend.springboot.app.dto.UsuarioDTO;
 import com.backend.springboot.app.services.UsuarioService;
@@ -51,5 +52,24 @@ public class UsuarioController {
 			return ResponseEntity.ok(respuestaDTO);		
 
 	}
+	
+	
+	@PostMapping("/validarcodigo")
+	@CrossOrigin(origins = "*")
+	@ResponseBody
+	public ResponseEntity<?> validarCodigo(@RequestBody CodigoDTO codigoDTO) {
+		RespuestaDTO respuestaDTO = usuarioService.validarClaveTemporal(codigoDTO);
+		return ResponseEntity.ok(respuestaDTO);
+	}
+	
+	
+	@PostMapping("/actualizarcontrasena")
+	@CrossOrigin(origins = "*")
+	@ResponseBody
+	public ResponseEntity<?> actualizarContrasena(@RequestBody UsuarioDTO usuarioDTO) {
+		RespuestaDTO respuestaDTO = usuarioService.actualizarContrasena(usuarioDTO);
+		return ResponseEntity.ok(respuestaDTO);
+	}
+
 
 }
